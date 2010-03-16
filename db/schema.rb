@@ -9,7 +9,119 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100201224350) do
+ActiveRecord::Schema.define(:version => 20100305012933) do
+
+  create_table "Birth_rate", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :float
+    t.column "births_199", :float
+    t.column "rate", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Births_and_deaths", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "births_1990", :float
+    t.column "deaths_1990", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Death_rate", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :float
+    t.column "death_1990", :float
+    t.column "rate", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Economical_activity", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "agriculture", :float
+    t.column "industry", :float
+    t.column "mining", :float
+    t.column "constructio", :float
+    t.column "government_", :float
+    t.column "other", :integer
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Ethnic_distribution", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "population_", :float
+    t.column "Han", :float
+    t.column "Tibetans", :float
+    t.column "Mongols", :float
+    t.column "Hui", :float
+    t.column "other", :integer
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Han_rate", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :float
+    t.column "pop_han", :float
+    t.column "rate", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Illiteracy_per_gender", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :float
+    t.column "illit_male", :float
+    t.column "illit_fem", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Illiteracy_rate", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :float
+    t.column "pop_illet", :float
+    t.column "rate", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Immigration_rate", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :integer
+    t.column "immig", :float
+    t.column "rate", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Population_density", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :float
+    t.column "sq_km", :float
+    t.column "density", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Population_per_gender", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "males_1990", :float
+    t.column "females_199", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "Tibetan_rate", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "pop_total", :float
+    t.column "pop_tib", :float
+    t.column "rate", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
 
   create_table "authors_descriptions", :id => false, :force => true do |t|
     t.column "author_id", :integer, :null => false
@@ -18,7 +130,25 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
 
   add_index "authors_descriptions", ["author_id", "description_id"], :name => "index_authors_descriptions_on_author_id_and_description_id", :unique => true
 
+  create_table "authors_notes", :id => false, :force => true do |t|
+    t.column "author_id", :integer, :null => false
+    t.column "note_id", :integer, :null => false
+  end
+
+  add_index "authors_notes", ["author_id", "note_id"], :name => "index_authors_notes_on_author_id_and_note_id", :unique => true
+
   create_table "bbox", :id => false, :force => true do |t|
+    t.column "gid", :integer
+    t.column "fid", :integer
+    t.column "object_type", :integer
+    t.column "language", :string
+    t.column "name", :string
+    t.column "writing", :string
+    t.column "geotype", :text
+    t.column "geometry", :geometry, :srid => nil
+  end
+
+  create_table "bbox_test", :id => false, :force => true do |t|
     t.column "gid", :integer
     t.column "fid", :integer
     t.column "object_type", :integer
@@ -108,6 +238,35 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "created_at", :timestamp
     t.column "updated_at", :timestamp
     t.column "title", :string
+  end
+
+  create_table "devanagari_poly", :id => false, :force => true do |t|
+    t.column "gid", :integer
+    t.column "fid", :integer
+    t.column "object_type", :integer
+    t.column "language", :string
+    t.column "name", :string
+    t.column "writing", :string
+    t.column "geotype", :text
+    t.column "geometry", :geometry, :srid => nil
+  end
+
+  create_table "devanagari_pt", :id => false, :force => true do |t|
+    t.column "gid", :integer
+    t.column "fid", :integer
+    t.column "object_type", :integer
+    t.column "language", :string
+    t.column "name", :string
+    t.column "writing", :string
+    t.column "geotype", :text
+    t.column "geometry", :geometry, :srid => nil
+  end
+
+  create_table "electricity_use_10_million_watt_hours", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "elect_use", :float
+    t.column "the_geom", :polygon, :srid => 4326
   end
 
   create_table "feature_geo_codes", :force => true do |t|
@@ -210,6 +369,21 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "geometry", :point, :srid => 4326
   end
 
+  create_table "grain_output_tons", :id => false, :force => true do |t|
+    t.column "gid", :integer, :null => false
+    t.column "name", :string, :limit => 27
+    t.column "output_tons", :float
+    t.column "the_geom", :polygon, :srid => 4326
+  end
+
+  create_table "illiteracy_per_gender", :id => false, :force => true do |t|
+    t.column "name", :text
+    t.column "pop_total", :float
+    t.column "illit_male", :float
+    t.column "illit_fem", :float
+    t.column "geometry", :geometry, :srid => 4326
+  end
+
   create_table "info_sources", :force => true do |t|
     t.column "code", :string, :null => false
     t.column "title", :string
@@ -238,8 +412,24 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "geometry", :geometry, :srid => nil
   end
 
+  create_table "note_titles", :force => true do |t|
+    t.column "title", :string
+    t.column "created_at", :timestamp
+    t.column "updated_at", :timestamp
+  end
+
+  create_table "notes", :force => true do |t|
+    t.column "notable_type", :string
+    t.column "notable_id", :integer
+    t.column "note_title_id", :integer
+    t.column "custom_note_title", :string
+    t.column "content", :text
+    t.column "created_at", :timestamp
+    t.column "updated_at", :timestamp
+  end
+
 # Could not dump table "open_id_authentication_associations" because of following StandardError
-#   Unknown type 'bytea' for column 'server_url' /Users/amontano/Workspaces/rails/master/places/vendor/plugins/spatial_adapter/lib/common_spatial_adapter.rb:44:in `table'/Users/amontano/Workspaces/rails/master/places/vendor/plugins/spatial_adapter/lib/common_spatial_adapter.rb:42:in `each'/Users/amontano/Workspaces/rails/master/places/vendor/plugins/spatial_adapter/lib/common_spatial_adapter.rb:42:in `table'/opt/local/lib/ruby/gems/1.8/gems/activerecord-2.3.2/lib/active_record/schema_dumper.rb:72:in `tables'/opt/local/lib/ruby/gems/1.8/gems/activerecord-2.3.2/lib/active_record/schema_dumper.rb:63:in `each'/opt/local/lib/ruby/gems/1.8/gems/activerecord-2.3.2/lib/active_record/schema_dumper.rb:63:in `tables'/opt/local/lib/ruby/gems/1.8/gems/activerecord-2.3.2/lib/active_record/schema_dumper.rb:25:in `dump'/opt/local/lib/ruby/gems/1.8/gems/activerecord-2.3.2/lib/active_record/schema_dumper.rb:19:in `dump'/opt/local/lib/ruby/gems/1.8/gems/rails-2.3.2/lib/tasks/databases.rake:251/opt/local/lib/ruby/gems/1.8/gems/rails-2.3.2/lib/tasks/databases.rake:250:in `open'/opt/local/lib/ruby/gems/1.8/gems/rails-2.3.2/lib/tasks/databases.rake:250/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `call'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `each'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/opt/local/lib/ruby/1.8/monitor.rb:242:in `synchronize'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/opt/local/lib/ruby/gems/1.8/gems/rails-2.3.2/lib/tasks/databases.rake:117/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `call'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `each'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/opt/local/lib/ruby/1.8/monitor.rb:242:in `synchronize'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2051:in `invoke_task'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `each'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2023:in `top_level'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2001:in `run'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:1998:in `run'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/bin/rake:31/opt/local/bin/rake:19:in `load'/opt/local/bin/rake:19
+#   Unknown type 'bytea' for column 'server_url' /Users/amontano/Workspaces/rails/basic/places/vendor/plugins/spatial_adapter/lib/common_spatial_adapter.rb:44:in `table'/Users/amontano/Workspaces/rails/basic/places/vendor/plugins/spatial_adapter/lib/common_spatial_adapter.rb:42:in `each'/Users/amontano/Workspaces/rails/basic/places/vendor/plugins/spatial_adapter/lib/common_spatial_adapter.rb:42:in `table'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/activerecord/lib/active_record/schema_dumper.rb:72:in `tables'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/activerecord/lib/active_record/schema_dumper.rb:63:in `each'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/activerecord/lib/active_record/schema_dumper.rb:63:in `tables'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/activerecord/lib/active_record/schema_dumper.rb:25:in `dump'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/activerecord/lib/active_record/schema_dumper.rb:19:in `dump'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/railties/lib/tasks/databases.rake:260/Users/amontano/Workspaces/rails/basic/places/vendor/rails/railties/lib/tasks/databases.rake:259:in `open'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/railties/lib/tasks/databases.rake:259/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `call'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `each'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/opt/local/lib/ruby/1.8/monitor.rb:242:in `synchronize'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/Users/amontano/Workspaces/rails/basic/places/vendor/rails/railties/lib/tasks/databases.rake:117/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `call'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `each'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/opt/local/lib/ruby/1.8/monitor.rb:242:in `synchronize'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2051:in `invoke_task'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `each'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2023:in `top_level'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2001:in `run'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/lib/rake.rb:1998:in `run'/opt/local/lib/ruby/gems/1.8/gems/rake-0.8.7/bin/rake:31/opt/local/bin/rake:19:in `load'/opt/local/bin/rake:19
 
   create_table "open_id_authentication_nonces", :force => true do |t|
     t.column "timestamp", :integer, :null => false
@@ -440,7 +630,7 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "fid", :integer
     t.column "object_type", :integer
     t.column "language", :string
-    t.column "name", :string
+    t.column "name", :string, :limit => nil
     t.column "writing", :string
     t.column "geotype", :text
     t.column "geometry", :geometry, :srid => nil
@@ -451,7 +641,7 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "fid", :integer
     t.column "object_type", :integer
     t.column "language", :string
-    t.column "name", :string
+    t.column "name", :string, :limit => nil
     t.column "writing", :string
     t.column "geotype", :text
     t.column "geometry", :geometry, :srid => nil
@@ -474,7 +664,7 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "fid", :integer
     t.column "object_type", :integer
     t.column "language", :string
-    t.column "name", :string
+    t.column "name", :string, :limit => nil
     t.column "writing", :string
     t.column "geotype", :text
     t.column "geometry", :geometry, :srid => nil
@@ -485,7 +675,29 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "fid", :integer
     t.column "object_type", :integer
     t.column "language", :string
-    t.column "name", :string
+    t.column "name", :string, :limit => nil
+    t.column "writing", :string
+    t.column "geotype", :text
+    t.column "geometry", :geometry, :srid => nil
+  end
+
+  create_table "tibetan_test_poly", :id => false, :force => true do |t|
+    t.column "gid", :integer
+    t.column "fid", :integer
+    t.column "object_type", :integer
+    t.column "language", :string
+    t.column "name", :string, :limit => nil
+    t.column "writing", :string
+    t.column "geotype", :text
+    t.column "geometry", :geometry, :srid => nil
+  end
+
+  create_table "tibetan_test_pt", :id => false, :force => true do |t|
+    t.column "gid", :integer
+    t.column "fid", :integer
+    t.column "object_type", :integer
+    t.column "language", :string
+    t.column "name", :string, :limit => nil
     t.column "writing", :string
     t.column "geotype", :text
     t.column "geometry", :geometry, :srid => nil
@@ -541,6 +753,11 @@ ActiveRecord::Schema.define(:version => 20100201224350) do
     t.column "writing", :string
     t.column "geotype", :text
     t.column "geometry", :geometry, :srid => nil
+  end
+
+  create_table "trtibet", :id => false, :force => true do |t|
+    t.column "pc", :string, :limit => 1
+    t.column "std", :string, :limit => 7
   end
 
   create_table "users", :force => true do |t|
