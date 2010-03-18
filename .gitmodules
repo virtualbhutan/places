@@ -28,9 +28,9 @@
 [submodule "vendor/plugins/places_engine"]
 	path = vendor/plugins/places_engine
 	url = git://github.com/thl/places_engine.git
-[submodule "vendor/plugins/basic_engine"]
-	path = vendor/plugins/basic_engine
-	url = git://github.com/amontano/basic_engine.git
 [submodule "vendor/plugins/proxy_engine"]
 	path = vendor/plugins/proxy_engine
 	url = git://github.com/thl/proxy_engine.git
+[submodule "vendor/plugins/virtualbhutan_engine"]
+	path = vendor/plugins/virtualbhutan_engine
+	url = git@github.com:virtualbhutan/virtualbhutan_engine.git
